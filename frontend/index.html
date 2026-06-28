@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manigandan | Portfolio</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">Mani<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <p class="hero-tag">👋 Hello, I'm</p>
+      <h1 class="hero-title">Manigandan<br/><span class="gradient-text">Full Stack Developer</span></h1>
+      <p class="hero-sub">I build clean, fast, and accessible web experiences — from pixel-perfect UIs to robust back-end APIs.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Hire Me</a>
+      </div>
+      <div class="hero-social">
+        <a href="https://github.com/manimade007-lgtm" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/manigandan-madesh-211a26374" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/mr._alone_boy_.05" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:manimade007@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="avatar-ring">
+        <img src="manigandan.png" alt="Manigandan" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I'm a full-stack developer passionate about building products that make a difference. With experience across the entire web stack, I turn complex problems into elegant, efficient solutions.</p>
+          <p>When I'm not coding, you'll find me exploring open-source projects, reading about system design, or watching cricket.</p>
+          <div class="about-stats">
+            <div class="stat"><span class="stat-num" data-target="15">0</span><span>+</span><p>Projects</p></div>
+            <div class="stat"><span class="stat-num" data-target="2">0</span><span>+</span><p>Years Exp.</p></div>
+            <div class="stat"><span class="stat-num" data-target="8">0</span><span>+</span><p>Technologies</p></div>
+          </div>
+          <a href="resume.pdf" class="btn btn-primary" download="Manigandan_Resume.pdf">Download CV <i class="fas fa-download"></i></a>
+        </div>
+        <div class="about-card">
+          <h3>Quick Facts</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Hosur, Tamil Nadu, India</li>
+            <li><i class="fas fa-graduation-cap"></i> B.E. Computer Science</li>
+            <li><i class="fas fa-briefcase"></i> Open to Work</li>
+            <li><i class="fas fa-language"></i> English, Tamil</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section class="section bg-alt" id="skills">
+    <div class="container">
+      <h2 class="section-title">My <span class="gradient-text">Skills</span></h2>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3><i class="fas fa-code"></i> Frontend</h3>
+          <div class="skill-tags">
+            <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+            <span>React.js</span><span>Tailwind CSS</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-server"></i> Backend</h3>
+          <div class="skill-tags">
+            <span>Node.js</span><span>Express.js</span>
+            <span>REST APIs</span><span>Python</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-database"></i> Database</h3>
+          <div class="skill-tags">
+            <span>MongoDB</span><span>MySQL</span>
+            <span>PostgreSQL</span><span>Redis</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-tools"></i> Tools</h3>
+          <div class="skill-tags">
+            <span>Git</span><span>Docker</span>
+            <span>VS Code</span><span>Postman</span><span>Vercel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROJECTS ── -->
+  <section class="section" id="projects">
+    <div class="container">
+      <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+      <p class="section-sub">Projects loaded dynamically from MongoDB via Express API</p>
+      <div class="projects-grid" id="projects-grid">
+        <div class="loading-spinner"><div class="spinner"></div><p>Loading projects…</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ADD PROJECT (Admin) ── -->
+  <section class="section bg-alt" id="add-project">
+    <div class="container">
+      <h2 class="section-title">Add <span class="gradient-text">Project</span></h2>
+      <form class="project-form" id="project-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Title *</label>
+            <input type="text" name="title" placeholder="Project title" required />
+          </div>
+          <div class="form-group">
+            <label>Tech Stack (comma-separated)</label>
+            <input type="text" name="tech" placeholder="React, Node.js, MongoDB" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Description *</label>
+          <textarea name="description" rows="3" placeholder="What does this project do?" required></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>GitHub URL</label>
+            <input type="url" name="github" placeholder="https://github.com/..." />
+          </div>
+          <div class="form-group">
+            <label>Live Demo URL</label>
+            <input type="url" name="live" placeholder="https://..." />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Image URL</label>
+          <input type="url" name="image" placeholder="https://..." />
+        </div>
+        <button type="submit" class="btn btn-primary">Add Project <i class="fas fa-plus"></i></button>
+        <div class="form-msg" id="form-msg"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+      <p class="section-sub">Have a project in mind or just want to say hi? I'd love to hear from you.</p>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-item"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>manimade007@gmail.com</p></div></div>
+          <div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><h4>Location</h4><p>Hosur, Tamil Nadu, India</p></div></div>
+          <div class="contact-item"><i class="fab fa-linkedin"></i><div><h4>LinkedIn</h4><a href="https://www.linkedin.com/in/manigandan-madesh-211a26374" target="_blank">linkedin.com/in/manigandan-madesh</a></div></div>
+          <div class="contact-item"><i class="fab fa-instagram"></i><div><h4>Instagram</h4><a href="https://www.instagram.com/mr._alone_boy_.05" target="_blank">@mr._alone_boy_.05</a></div></div>
+          <div class="contact-item"><i class="fab fa-github"></i><div><h4>GitHub</h4><a href="https://github.com/manimade007-lgtm" target="_blank">github.com/manimade007-lgtm</a></div></div>
+        </div>
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" name="name" placeholder="Your Name" required />
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" placeholder="Your Email" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message <i class="fas fa-paper-plane"></i></button>
+          <div class="form-msg" id="contact-msg"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 Manigandan. Built with Node.js, Express & MongoDB.</p>
+      <div class="footer-social">
+        <a href="https://github.com/manimade007-lgtm" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/manigandan-madesh-211a26374" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/mr._alone_boy_.05" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:manimade007@gmail.com"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
