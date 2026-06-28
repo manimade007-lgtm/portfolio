@@ -1,10 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// MongoDB connection
+let isConnected = false;
+async function connectDB() {
+  if (isConnected) return;
+  await mongoose.connect(process.env.MONGO_URI);
+  isConnected = true;
+}
 
 // Project Schema
 const projectSchema = new mongoose.Schema({
@@ -15,43 +24,15 @@ const projectSchema = new mongoose.Schema({
   live:        String,
   image:       String,
 }, { timestamps: true });
-const Project = mongoose.model('Project', projectSchema);
+const Project = mongoose.models.Project || mongoose.model('Project', projectSchema);
 
 // Contact Schema
 const contactSchema = new mongoose.Schema({
   name: String, email: String, message: String,
 }, { timestamps: true });
-const Contact = mongoose.model('Contact', contactSchema);
+const Contact = mongoose.models.Contact || mongoose.model('Contact', contactSchema);
 
-// Routes
-app.get('/api/projects', async (req, res) => {
-  const projects = await Project.find().sort({ createdAt: -1 });
-  res.json(projects);
-});
-
-app.post('/api/projects', async (req, res) => {
-  try {
-    const project = await Project.create(req.body);
-    res.status(201).json(project);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-});
-
-app.delete('/api/projects/:id', async (req, res) => {
-  await Project.findByIdAndDelete(req.params.id);
-  res.json({ message: 'Deleted' });
-});
-
-app.post('/api/contact', async (req, res) => {
-  try {
-    await Contact.create(req.body);
-    res.status(201).json({ message: 'Message received!' });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-});
-
+// Seed sample projects
 async function seedProjects() {
   const count = await Project.countDocuments();
   if (count === 0) {
@@ -81,19 +62,55 @@ async function seedProjects() {
         image: 'https://images.unsplash.com/photo-1504608524841-42584120d693?w=400&h=250&fit=crop',
       },
     ]);
-    console.log('Sample projects seeded');
   }
 }
 
-require('dotenv').config();
-
-mongoose.connect(process.env.MONGO_URI)
-  .then(async () => {
-    console.log('MongoDB connected');
+// Routes
+app.get('/api/projects', async (req, res) => {
+  try {
+    await connectDB();
     await seedProjects();
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch(err => console.error('MongoDB error:', err));
+    const projects = await Project.find().sort({ createdAt: -1 });
+    res.json(projects);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/projects', async (req, res) => {
+  try {
+    await connectDB();
+    const project = await Project.create(req.body);
+    res.status(201).json(project);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.delete('/api/projects/:id', async (req, res) => {
+  try {
+    await connectDB();
+    await Project.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Deleted' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/contact', async (req, res) => {
+  try {
+    await connectDB();
+    await Contact.create(req.body);
+    res.status(201).json({ message: 'Message received!' });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Local dev
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
 
 module.exports = app;
