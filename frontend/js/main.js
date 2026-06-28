@@ -1,4 +1,4 @@
-const API = 'http://localhost:5000/api';
+const API = 'https://portfolio-kappa-nine-e2pdxelpwk.vercel.app/api';
 
 // ── Navbar scroll effect ──
 const navbar = document.getElementById('navbar');
