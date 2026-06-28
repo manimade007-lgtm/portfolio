@@ -85,25 +85,15 @@ async function seedProjects() {
   }
 }
 
-async function startServer() {
-  try {
-    // Try Atlas first
-    require('dotenv').config();
-    await mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 5000 });
-    console.log('MongoDB Atlas connected');
-  } catch (err) {
-    // Fallback to in-memory MongoDB
-    console.log('Atlas unavailable, starting in-memory database...');
-    const { MongoMemoryServer } = require('mongodb-memory-server');
-    const mongod = await MongoMemoryServer.create();
-    const uri = mongod.getUri();
-    await mongoose.connect(uri);
-    console.log('In-memory MongoDB connected');
-  }
+require('dotenv').config();
 
-  await seedProjects();
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-}
+mongoose.connect(process.env.MONGO_URI)
+  .then(async () => {
+    console.log('MongoDB connected');
+    await seedProjects();
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch(err => console.error('MongoDB error:', err));
 
-startServer();
+module.exports = app;
