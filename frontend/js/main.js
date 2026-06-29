@@ -1,4 +1,4 @@
-const API = 'https://portfolio-dp3p.onrender.com/api';
+const API = 'https://portfolio-kappa-nine-e2pdxelpwk.vercel.app/api';
 
 // ── Navbar scroll effect ──
 const navbar = document.getElementById('navbar');

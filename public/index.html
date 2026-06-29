@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Manigandan – Full Stack Developer. Projects, skills, and contact." />
+  <title>Manigandan | Full Stack Developer</title>
+
+  <!-- 1. Preconnect before font request — eliminates DNS + TLS cost -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- 2. Non-render-blocking font load (media trick) -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&family=Space+Mono&display=swap"
+        media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&family=Space+Mono&display=swap" />
+  </noscript>
+
+  <!-- 3. Critical CSS inline — zero render-blocking for above-the-fold -->
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:hsl(240,10%,4%);--bg-card:hsl(240,10%,7%);--border:hsl(240,10%,14%);--fg:hsl(0,0%,98%);--muted:hsl(240,5%,64%);--primary:hsl(252,80%,65%);--radius:.5rem}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    #navbar{position:fixed;top:0;left:0;right:0;z-index:100;background:hsl(240,10%,4%,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav-inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-family:Syne,sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-.04em}
+    .logo span{color:var(--primary)}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{font-size:.875rem;color:var(--muted);transition:color .15s}
+    .nav-links a:hover,.nav-links a.active{color:var(--fg)}
+    .menu-toggle{display:none;background:none;border:none;color:var(--fg);font-size:1.5rem;cursor:pointer;padding:.25rem}
+    .hero{min-height:100svh;display:flex;align-items:center;justify-content:center;padding:6rem 1.5rem 4rem;max-width:1100px;margin:0 auto;gap:3rem}
+    .hero-content{flex:1}
+    .tag{font-family:"Space Mono",monospace;font-size:.875rem;color:var(--primary);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
+    .hero-name{font-family:Syne,sans-serif;font-size:clamp(2.8rem,8vw,5rem);font-weight:800;line-height:1;letter-spacing:-.04em;margin-bottom:.5rem}
+    .dot{color:var(--primary)}
+    .hero-role{font-family:Syne,sans-serif;font-size:clamp(1.1rem,3vw,1.75rem);font-weight:600;color:var(--muted);margin-bottom:1.25rem}
+    .hero-bio{max-width:480px;color:var(--muted);margin-bottom:2rem}
+    .hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;padding:.65rem 1.5rem;border-radius:var(--radius);font-size:.875rem;font-weight:500;cursor:pointer;transition:opacity .15s,transform .15s,border-color .15s,color .15s;border:1px solid transparent}
+    .btn-primary{background:var(--primary);color:#fff}
+    .btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+    .btn-outline{border-color:var(--border);color:var(--fg);background:transparent}
+    .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+    .hero-img-wrap{flex-shrink:0;width:260px;height:260px;border-radius:50%;border:2px solid var(--border);overflow:hidden;box-shadow:0 0 60px hsl(252,80%,65%,.15)}
+    .hero-img{width:100%;height:100%;object-fit:cover}
+    @media(max-width:768px){
+      .hero{flex-direction:column-reverse;text-align:center;padding-top:7rem}
+      .hero-bio{margin:0 auto 2rem}
+      .hero-cta{justify-content:center}
+      .hero-img-wrap{width:160px;height:160px}
+      .nav-links{display:none;flex-direction:column;gap:1rem;position:absolute;top:64px;left:0;right:0;background:var(--bg-card);padding:1.5rem;border-bottom:1px solid var(--border)}
+      .nav-links.open{display:flex}
+      .menu-toggle{display:block}
+    }
+  </style>
+
+  <!-- 4. style.css deferred — loaded after paint via JS, no render block -->
+  <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="style.css" /></noscript>
+
+  <!-- 5. Favicon — inline SVG, zero HTTP request -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="logo">MG<span>.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <p class="tag">Hello, I'm</p>
+      <h1 class="hero-name">Manigandan<span class="dot">.</span></h1>
+      <h2 class="hero-role">Full-Stack Developer</h2>
+      <p class="hero-bio">I build fast, accessible, and beautiful web experiences — from database to deployment.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="resume.pdf" class="btn btn-outline" download>Download CV</a>
+      </div>
+    </div>
+    <div class="hero-img-wrap">
+      <!-- width/height prevents layout shift (CLS = 0) -->
+      <img src="manigandan.png" alt="Manigandan profile photo"
+           class="hero-img" width="260" height="260"
+           loading="eager" fetchpriority="high" decoding="async" />
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <p>I'm a passionate full-stack developer with experience building modern web applications. I love turning complex problems into clean, intuitive solutions.</p>
+      <p>Currently focused on React, Node.js, and cloud deployments. When I'm not coding, I'm exploring new technologies and contributing to open source.</p>
+      <div class="about-stats">
+        <div class="stat"><span class="stat-num">10+</span><span>Projects</span></div>
+        <div class="stat"><span class="stat-num">2+</span><span>Years Exp.</span></div>
+        <div class="stat"><span class="stat-num">5+</span><span>Happy Clients</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS — skeleton placeholders, filled by JS -->
+  <section id="skills" class="section section-alt">
+    <h2 class="section-title">Skills</h2>
+    <div id="skills-container" class="skills-grid" aria-live="polite">
+      <div class="sk-skel"></div><div class="sk-skel"></div><div class="sk-skel"></div>
+      <div class="sk-skel"></div><div class="sk-skel"></div><div class="sk-skel"></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS — skeleton placeholders -->
+  <section id="projects" class="section">
+    <h2 class="section-title">Projects</h2>
+    <div id="projects-container" class="projects-grid" aria-live="polite">
+      <div class="sk-skel sk-tall"></div>
+      <div class="sk-skel sk-tall"></div>
+      <div class="sk-skel sk-tall"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section section-alt">
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <p>Have a project in mind or just want to say hi? My inbox is always open.</p>
+        <div class="contact-links">
+          <a href="mailto:manigandan@example.com">✉ manigandan@example.com</a>
+          <a href="https://github.com/manigandan" target="_blank" rel="noopener">↗ github.com/manigandan</a>
+          <a href="https://linkedin.com/in/manigandan" target="_blank" rel="noopener">↗ linkedin.com/in/manigandan</a>
+        </div>
+      </div>
+      <form id="contact-form" class="contact-form" novalidate>
+        <div class="form-group">
+          <input type="text" id="fname" name="name" placeholder="Your Name" required autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <input type="email" id="femail" name="email" placeholder="Your Email" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <textarea id="fmessage" name="message" rows="5" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submit-btn">Send Message</button>
+        <p id="form-msg" class="form-message" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Designed &amp; Built by <strong>Manigandan</strong> &mdash; <span id="year"></span></p>
+  </footer>
+
+  <!-- defer: parses HTML first, then runs JS — never blocks rendering -->
+  <script src="app.js" defer></script>
+</body>
+</html>

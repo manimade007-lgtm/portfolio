@@ -1,0 +1,180 @@
+/* style.css — non-critical styles loaded after paint */
+
+:root {
+  --bg:       hsl(240,10%,4%);
+  --bg-card:  hsl(240,10%,7%);
+  --border:   hsl(240,10%,14%);
+  --fg:       hsl(0,0%,98%);
+  --muted:    hsl(240,5%,64%);
+  --primary:  hsl(252,80%,65%);
+  --radius:   .5rem;
+}
+
+/* ── Section layout ── */
+.section {
+  padding: 5rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-alt {
+  max-width: 100%;
+  background: var(--bg-card);
+  padding: 5rem 1.5rem;
+}
+.section-alt .section-title,
+.section-alt .skills-grid,
+.section-alt .contact-wrapper {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-title {
+  font-family: Syne, sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  margin-bottom: 2.5rem;
+}
+.section-title::after { content: "."; color: var(--primary); }
+
+/* ── About ── */
+.about-grid p { color: var(--muted); max-width: 680px; margin-bottom: 1rem; }
+.about-stats  { display: flex; gap: 2.5rem; margin-top: 2rem; flex-wrap: wrap; }
+.stat         { display: flex; flex-direction: column; }
+.stat-num     { font-family: Syne, sans-serif; font-size: 2rem; font-weight: 800; color: var(--primary); }
+.stat span:last-child { font-size: .875rem; color: var(--muted); }
+
+/* ── Skills ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.skill-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  /* only promote cards that actually animate */
+  contain: layout style;
+}
+.skill-header   { display: flex; justify-content: space-between; margin-bottom: .5rem; }
+.skill-name     { font-size: .875rem; font-weight: 500; }
+.skill-level    { font-size: .75rem; color: var(--primary); font-family: "Space Mono", monospace; }
+.skill-bar      { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+/* Use scaleX instead of width — transform is GPU-composited, width causes layout */
+.skill-fill     {
+  height: 100%; background: var(--primary); border-radius: 2px;
+  width: 100%;                          /* always full width */
+  transform: scaleX(0);                 /* start invisible */
+  transform-origin: left center;
+  transition: transform .7s ease;
+  will-change: transform;               /* GPU layer — zero layout cost */
+}
+.skill-category { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-top: .4rem; }
+
+/* ── Projects ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 4px);
+  padding: 1.5rem;
+  display: flex; flex-direction: column;
+  transition: border-color .2s, box-shadow .2s;
+  contain: layout style;
+}
+.project-card:hover {
+  border-color: hsl(252,80%,65%,.4);
+  box-shadow: 0 0 30px hsl(252,80%,65%,.12);
+}
+.project-featured { font-family: "Space Mono", monospace; font-size: .7rem; color: var(--primary); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem; }
+.project-title    { font-family: Syne, sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: .5rem; }
+.project-desc     { font-size: .875rem; color: var(--muted); flex: 1; margin-bottom: 1.25rem; }
+.project-tech     { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.25rem; }
+.tech-tag         { font-size: .7rem; font-family: "Space Mono", monospace; background: var(--bg); color: var(--muted); border: 1px solid var(--border); padding: .2rem .5rem; border-radius: 4px; }
+.project-links    { display: flex; gap: .75rem; }
+.project-links a  { font-size: .8rem; color: var(--muted); border: 1px solid var(--border); padding: .35rem .85rem; border-radius: var(--radius); transition: color .15s, border-color .15s; }
+.project-links a:hover { color: var(--primary); border-color: var(--primary); }
+
+/* ── Contact ── */
+.contact-wrapper { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; }
+.contact-info p  { color: var(--muted); margin-bottom: 1.5rem; }
+.contact-links   { display: flex; flex-direction: column; gap: .75rem; }
+.contact-links a { font-size: .875rem; color: var(--muted); transition: color .15s; }
+.contact-links a:hover { color: var(--primary); }
+
+.contact-form    { display: flex; flex-direction: column; gap: 1rem; }
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .75rem 1rem;
+  color: var(--fg);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: .875rem;
+  transition: border-color .15s;
+  resize: vertical;
+}
+.form-group input:focus,
+.form-group textarea:focus  { outline: none; border-color: var(--primary); }
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--muted); }
+.form-message               { font-size: .875rem; margin-top: .5rem; min-height: 1.2em; }
+.form-message.success       { color: hsl(142,72%,50%); }
+.form-message.error         { color: hsl(0,84%,60%); }
+
+/* ── Footer ── */
+footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .875rem; }
+
+/* ── Skeleton shimmer — GPU-composited (transform + opacity only) ── */
+.sk-skel {
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  min-height: 90px;
+  position: relative;
+  overflow: hidden;
+}
+.sk-tall { min-height: 220px; }
+.sk-skel::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 0%, hsl(240,10%,18%,.6) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: shimmer .9s infinite;
+  will-change: transform;
+}
+@keyframes shimmer { to { transform: translateX(100%); } }
+
+/* ── Scroll reveal — composited (opacity + transform) ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .45s ease, transform .45s ease;
+  will-change: opacity, transform;
+}
+.reveal.visible { opacity: 1; transform: none; will-change: auto; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .section, .section-alt { padding: 3.5rem 1.25rem; }
+  .contact-wrapper { grid-template-columns: 1fr; gap: 2rem; }
+}
+@media (max-width: 480px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .skills-grid   { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Respect reduced-motion preference ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  html { scroll-behavior: auto; }
+  .skill-fill { transition: none; }
+}
